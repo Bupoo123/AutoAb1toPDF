@@ -1,0 +1,29 @@
+# 打包输出
+release-package/
+*.zip
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 测试数据（可选，如果不想提交测试数据）
+ab1测试数据/
+
+# 临时文件
+*.tmp
+*.log
+*.swp
+*~
+
+# 压缩文件（如果不想提交）
+*.rar
+*.7z
+
+# 文档文件（可选，如果不想提交 Word 文档）
+*.docx
+
+# 但保留必要的文件：
+!AutoHotkey_1.1.37.02_setup.exe
+!chromas_batch_print.ahk
+

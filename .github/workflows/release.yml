@@ -1,0 +1,88 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # 当推送以 v 开头的 tag 时触发
+  workflow_dispatch:  # 允许手动触发
+    inputs:
+      version:
+        description: '版本号 (例如: 1.0.0)'
+        required: true
+        default: '1.0.0'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Set up version
+      id: version
+      run: |
+        if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+          VERSION="${{ github.event.inputs.version }}"
+        else
+          VERSION=${GITHUB_REF#refs/tags/v}
+        fi
+        echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+        echo "版本号: $VERSION"
+        
+    - name: Create package directory
+      run: |
+        mkdir -p release-package
+        
+    - name: Copy files to package
+      run: |
+        cp chromas_batch_print.ahk release-package/ || true
+        cp README.md release-package/ || true
+        cp AutoHotkey_1.1.37.02_setup.exe release-package/ || true
+        
+        # 创建版本信息
+        echo "AutoAb1toPDF" > release-package/VERSION.txt
+        echo "版本: ${{ steps.version.outputs.VERSION }}" >> release-package/VERSION.txt
+        echo "打包日期: $(date '+%Y-%m-%d %H:%M:%S')" >> release-package/VERSION.txt
+        
+    - name: Create ZIP package
+      run: |
+        cd release-package
+        zip -r ../AutoAb1toPDF-v${{ steps.version.outputs.VERSION }}.zip .
+        cd ..
+        ls -lh AutoAb1toPDF-v*.zip
+        
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: v${{ steps.version.outputs.VERSION }}
+        name: AutoAb1toPDF v${{ steps.version.outputs.VERSION }}
+        body: |
+          ## AutoAb1toPDF v${{ steps.version.outputs.VERSION }}
+          
+          ### 📦 下载
+          点击下方下载按钮下载完整发布包。
+          
+          ### 🚀 快速开始
+          1. 解压下载的 ZIP 文件
+          2. 安装 AutoHotkey（如果未安装，发布包中包含安装程序）
+          3. 安装 Chromas
+          4. 设置 Microsoft Print to PDF 为默认打印机
+          5. 将脚本复制到 `C:\ab1\` 目录
+          6. 按照 README.md 中的说明使用
+          
+          ### 📝 详细说明
+          请查看发布包中的 README.md 文件获取完整使用说明。
+          
+          ### 🔧 环境要求
+          - Windows 10/11
+          - Chromas
+          - AutoHotkey v1.x
+          - Microsoft Print to PDF（默认打印机）
+        files: |
+          AutoAb1toPDF-v${{ steps.version.outputs.VERSION }}.zip
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
