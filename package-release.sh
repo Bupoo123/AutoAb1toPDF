@@ -59,6 +59,24 @@ if [ -f "AutoHotkey_1.1.37.02_setup.exe" ]; then
     echo -e "${GREEN}✓ 已复制 AutoHotkey 安装程序${NC}"
 fi
 
+# 复制 Chromas.rar（如果存在）
+if [ -f "Chromas.rar" ]; then
+    cp "Chromas.rar" "$PACKAGE_DIR/"
+    echo -e "${GREEN}✓ 已复制 Chromas.rar${NC}"
+fi
+
+# 复制 ab1 测试数据目录（如果存在）
+if [ -d "ab1测试数据" ]; then
+    # 检查是否有 ab1 文件
+    AB1_COUNT=$(find "ab1测试数据" -name "*.ab1" 2>/dev/null | wc -l | tr -d ' ')
+    if [ "$AB1_COUNT" -gt 0 ]; then
+        cp -r "ab1测试数据" "$PACKAGE_DIR/"
+        echo -e "${GREEN}✓ 已复制 ab1测试数据目录（包含 ${AB1_COUNT} 个 .ab1 文件）${NC}"
+    else
+        echo -e "${YELLOW}⚠ ab1测试数据目录存在但为空，跳过${NC}"
+    fi
+fi
+
 # 创建使用说明文件（如果 README 不存在，创建一个简化版）
 if [ ! -f "README.md" ]; then
     echo -e "${YELLOW}创建简化版使用说明...${NC}"
@@ -78,13 +96,60 @@ EOF
 fi
 
 # 创建版本信息文件
-echo -e "${BLUE}[3/4] 创建版本信息...${NC}"
+echo -e "${BLUE}[3/4] 创建版本信息和说明...${NC}"
 cat > "$PACKAGE_DIR/VERSION.txt" << EOF
 AutoAb1toPDF
 版本: ${VERSION}
 打包日期: $(date '+%Y-%m-%d %H:%M:%S')
 EOF
 echo -e "${GREEN}✓ 已创建版本信息${NC}"
+
+# 创建 Chromas 安装说明（如果包含 Chromas.rar）
+if [ -f "Chromas.rar" ]; then
+    cat > "$PACKAGE_DIR/Chromas安装说明.txt" << 'EOF'
+Chromas 安装说明
+================
+
+本发布包包含 Chromas.rar 压缩文件，请按以下步骤安装：
+
+1. 解压 Chromas.rar 文件
+   - Windows 系统可以使用 WinRAR、7-Zip 或其他解压工具
+   - 如果系统没有解压工具，可以从以下地址下载：
+     * 7-Zip: https://www.7-zip.org/
+     * WinRAR: https://www.winrar.com/
+
+2. 解压后，将 Chromas.exe 复制到以下目录（或你喜欢的其他位置）：
+   C:\Program Files\Chromas\
+
+3. 如果脚本中的路径与你的安装位置不同，请编辑 chromas_batch_print.ahk
+   修改第一行的路径：
+   chromasExe := "C:\Program Files\Chromas\Chromas.exe"
+
+4. 安装完成后，即可使用脚本进行批量转换。
+EOF
+    echo -e "${GREEN}✓ 已创建 Chromas 安装说明${NC}"
+fi
+
+# 创建测试数据说明（如果包含测试数据）
+if [ -d "$PACKAGE_DIR/ab1测试数据" ] && [ -n "$(find "$PACKAGE_DIR/ab1测试数据" -name "*.ab1" 2>/dev/null)" ]; then
+    cat > "$PACKAGE_DIR/测试数据说明.txt" << 'EOF'
+测试数据说明
+============
+
+本发布包包含 ab1测试数据 目录，其中有示例 .ab1 文件可用于测试。
+
+使用方法：
+1. 将 ab1测试数据 目录中的 .ab1 文件复制到：
+   C:\ab1\ab1_inputs
+
+2. 运行 chromas_batch_print.ahk 脚本
+
+3. 转换完成后，在 C:\ab1\ab1_pdfs 目录查看生成的 PDF 文件
+
+这些测试文件可以帮助你验证脚本是否正常工作。
+EOF
+    echo -e "${GREEN}✓ 已创建测试数据说明${NC}"
+fi
 
 # 打包成 zip
 echo -e "${BLUE}[4/4] 打包成 ZIP 文件...${NC}"

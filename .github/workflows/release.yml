@@ -39,11 +39,63 @@ jobs:
         cp chromas_batch_print.ahk release-package/ || true
         cp README.md release-package/ || true
         cp AutoHotkey_1.1.37.02_setup.exe release-package/ || true
+        cp Chromas.rar release-package/ || true
+        
+        # 复制 ab1 测试数据（如果存在）
+        if [ -d "ab1测试数据" ] && [ -n "$(find ab1测试数据 -name '*.ab1' 2>/dev/null)" ]; then
+          cp -r ab1测试数据 release-package/
+          echo "已包含 ab1 测试数据"
+        fi
         
         # 创建版本信息
         echo "AutoAb1toPDF" > release-package/VERSION.txt
         echo "版本: ${{ steps.version.outputs.VERSION }}" >> release-package/VERSION.txt
         echo "打包日期: $(date '+%Y-%m-%d %H:%M:%S')" >> release-package/VERSION.txt
+        
+        # 创建 Chromas 安装说明（如果包含 Chromas.rar）
+        if [ -f "Chromas.rar" ]; then
+          cat > release-package/Chromas安装说明.txt << 'EOF'
+Chromas 安装说明
+================
+
+本发布包包含 Chromas.rar 压缩文件，请按以下步骤安装：
+
+1. 解压 Chromas.rar 文件
+   - Windows 系统可以使用 WinRAR、7-Zip 或其他解压工具
+   - 如果系统没有解压工具，可以从以下地址下载：
+     * 7-Zip: https://www.7-zip.org/
+     * WinRAR: https://www.winrar.com/
+
+2. 解压后，将 Chromas.exe 复制到以下目录（或你喜欢的其他位置）：
+   C:\Program Files\Chromas\
+
+3. 如果脚本中的路径与你的安装位置不同，请编辑 chromas_batch_print.ahk
+   修改第一行的路径：
+   chromasExe := "C:\Program Files\Chromas\Chromas.exe"
+
+4. 安装完成后，即可使用脚本进行批量转换。
+EOF
+        fi
+        
+        # 创建测试数据说明（如果包含测试数据）
+        if [ -d "release-package/ab1测试数据" ] && [ -n "$(find release-package/ab1测试数据 -name '*.ab1' 2>/dev/null)" ]; then
+          cat > release-package/测试数据说明.txt << 'EOF'
+测试数据说明
+============
+
+本发布包包含 ab1测试数据 目录，其中有示例 .ab1 文件可用于测试。
+
+使用方法：
+1. 将 ab1测试数据 目录中的 .ab1 文件复制到：
+   C:\ab1\ab1_inputs
+
+2. 运行 chromas_batch_print.ahk 脚本
+
+3. 转换完成后，在 C:\ab1\ab1_pdfs 目录查看生成的 PDF 文件
+
+这些测试文件可以帮助你验证脚本是否正常工作。
+EOF
+        fi
         
     - name: Create ZIP package
       run: |
