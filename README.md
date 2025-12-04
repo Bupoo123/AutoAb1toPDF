@@ -197,14 +197,14 @@ Send, #{Space}
 
 1. **访问 Release 页面**
    ```
-   https://github.com/bupoo123/AutoAb1toPDF/releases
+   https://github.com/Bupoo123/AutoAb1toPDF/releases
    ```
 
 2. **下载最新版本**
    - 点击 `AutoAb1toPDF-v*.zip` 下载按钮
-   - 或使用直接下载链接（将 `bupoo123` 和版本号替换为实际值）：
+   - 或使用直接下载链接（将 `Bupoo123` 和版本号替换为实际值）：
      ```
-     https://github.com/bupoo123/AutoAb1toPDF/releases/latest/download/AutoAb1toPDF-v*.zip
+     https://github.com/Bupoo123/AutoAb1toPDF/releases/latest/download/AutoAb1toPDF-v*.zip
      ```
 
 3. **解压文件**
@@ -218,7 +218,7 @@ Send, #{Space}
 
 1. **克隆仓库**
    ```bash
-   git clone https://github.com/bupoo123/AutoAb1toPDF.git
+   git clone https://github.com/Bupoo123/AutoAb1toPDF.git
    cd AutoAb1toPDF
    ```
 

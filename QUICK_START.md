@@ -6,14 +6,14 @@
 
 1. 访问项目的 Release 页面：
    ```
-   https://github.com/bupoo123/AutoAb1toPDF/releases
+   https://github.com/Bupoo123/AutoAb1toPDF/releases
    ```
 
 2. 下载最新版本的 ZIP 文件：
    - 点击 `AutoAb1toPDF-v*.zip` 下载
-   - 或使用直接下载链接（将 `bupoo123` 替换为实际用户名）：
+   - 或使用直接下载链接（将 `Bupoo123` 替换为实际用户名）：
      ```
-     https://github.com/bupoo123/AutoAb1toPDF/releases/latest/download/AutoAb1toPDF-v*.zip
+     https://github.com/Bupoo123/AutoAb1toPDF/releases/latest/download/AutoAb1toPDF-v*.zip
      ```
 
 3. 解压 ZIP 文件到任意目录
@@ -22,7 +22,7 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/bupoo123/AutoAb1toPDF.git
+git clone https://github.com/Bupoo123/AutoAb1toPDF.git
 cd AutoAb1toPDF
 
 # 运行打包脚本

@@ -41,12 +41,12 @@
 
 发布完成后，Release 链接格式为：
 ```
-https://github.com/bupoo123/AutoAb1toPDF/releases/tag/v1.0.0
+https://github.com/Bupoo123/AutoAb1toPDF/releases/tag/v1.0.0
 ```
 
 所有 Release 列表：
 ```
-https://github.com/bupoo123/AutoAb1toPDF/releases
+https://github.com/Bupoo123/AutoAb1toPDF/releases
 ```
 
 ## 📦 方式二：手动创建 Release
@@ -65,7 +65,7 @@ https://github.com/bupoo123/AutoAb1toPDF/releases
 2. **在 GitHub 上创建 Release**
    - 进入项目页面
    - 点击右侧 "Releases" → "Create a new release"
-   - 或直接访问：`https://github.com/bupoo123/AutoAb1toPDF/releases/new`
+   - 或直接访问：`https://github.com/Bupoo123/AutoAb1toPDF/releases/new`
 
 3. **填写 Release 信息**
    - **Tag version**: 输入 `v1.0.0`（或你的版本号）
@@ -103,17 +103,17 @@ https://github.com/bupoo123/AutoAb1toPDF/releases
 
 ### 最新版本下载链接
 ```
-https://github.com/bupoo123/AutoAb1toPDF/releases/latest/download/AutoAb1toPDF-v1.0.0.zip
+https://github.com/Bupoo123/AutoAb1toPDF/releases/latest/download/AutoAb1toPDF-v1.0.0.zip
 ```
 
 ### 特定版本下载链接
 ```
-https://github.com/bupoo123/AutoAb1toPDF/releases/download/v1.0.0/AutoAb1toPDF-v1.0.0.zip
+https://github.com/Bupoo123/AutoAb1toPDF/releases/download/v1.0.0/AutoAb1toPDF-v1.0.0.zip
 ```
 
 ### Release 页面链接
 ```
-https://github.com/bupoo123/AutoAb1toPDF/releases
+https://github.com/Bupoo123/AutoAb1toPDF/releases
 ```
 
 ## 📋 发布检查清单
@@ -152,16 +152,16 @@ https://github.com/bupoo123/AutoAb1toPDF/releases
 ## 📥 下载
 
 ### 最新版本
-[下载最新版本](https://github.com/bupoo123/AutoAb1toPDF/releases/latest)
+[下载最新版本](https://github.com/Bupoo123/AutoAb1toPDF/releases/latest)
 
 ### 所有版本
-[查看所有版本](https://github.com/bupoo123/AutoAb1toPDF/releases)
+[查看所有版本](https://github.com/Bupoo123/AutoAb1toPDF/releases)
 ```
 
 ### 在文档中引用
 
 ```markdown
-请从 [GitHub Releases](https://github.com/bupoo123/AutoAb1toPDF/releases) 下载最新版本。
+请从 [GitHub Releases](https://github.com/Bupoo123/AutoAb1toPDF/releases) 下载最新版本。
 ```
 
 ## 🔧 故障排除
